@@ -63,6 +63,7 @@ pipeline{
          agent any
          when{
             changeset "**/worker/**"
+	    branch 'master'
          }
          steps{
            echo 'Packaging worker app with docker'
@@ -70,7 +71,7 @@ pipeline{
              docker.withRegistry('https://index.docker.io/v1/', 'dockerlogin') {
                 def workerImage = docker.build("aydakca/worker:v${env.BUILD_ID}", "./worker")
                 workerImage.push()
-                workerImage.push("latest")
+                workerImage.push("${env.BRANCH_NAME}")
              }
           } 
       }
