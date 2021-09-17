@@ -74,9 +74,8 @@ pipeline{
                 workerImage.push("${env.BRANCH_NAME}")
              }
           } 
-      }
+      }}
 
-    stages{
         stage("result build"){
             agent {
               docker{
@@ -182,9 +181,7 @@ stage('vote build'){
           }
       }
 }
-
-    }
-    
+  
     post{
         always{
             echo "This pipeline run is completed.."
@@ -196,5 +193,4 @@ stage('vote build'){
 	    echo "Success"
 	}
     }
-}
 }
